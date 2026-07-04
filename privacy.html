@@ -10,8 +10,12 @@
       system consent on Android 10+). "Never deletes" stays true; do not reintroduce "read-only"
       wording while the editor exists.
     - Network: Ktor + Coil -> MusicBrainz, Cover Art Archive, fanart.tv
-    - Google: Play services code scanner (QR join), Firebase (Crashlytics, Analytics, Cloud
-      Messaging, Remote Config) - pre-covered ahead of the release that ships them
+    - Google: Play services code scanner (QR join), Firebase (Crashlytics, Analytics, Performance
+      Monitoring, Cloud Messaging, Remote Config) - pre-covered ahead of the release that ships them
+    - Purchases (PLANNED, not yet shipped): RevenueCat SDK + Google Play Billing for optional in-app
+      purchases - pre-covered in section 7. When it ships, confirm the collected data types
+      (purchase history, RevenueCat app-user id, device metadata) and keep the Play Data safety form
+      in sync.
     - Session sync transfers the CURRENT TRACK's full bytes host->clients (protocol FileOffer).
       The "no lasting copy" wording in section 4 depends on clients decoding in memory and
       deleting the decode temp file (AudioPlayer.prepare). Re-check that section if received
@@ -75,6 +79,7 @@
       <li><a href="#sessions">Listening sessions on your local network</a></li>
       <li><a href="#qr">QR code scanning</a></li>
       <li><a href="#firebase">Firebase services (Google)</a></li>
+      <li><a href="#purchases">In-app purchases (RevenueCat)</a></li>
       <li><a href="#permissions">App permissions and why</a></li>
       <li><a href="#never">What dodast never does</a></li>
       <li><a href="#retention">Data retention and deletion</a></li>
@@ -128,13 +133,22 @@
   <ul>
     <li><strong>Crashlytics</strong> — when the app crashes, a report is sent containing the stack trace, device model and OS version, app version, state at the time of the crash, and a Crashlytics-generated installation identifier. Purpose: finding and fixing bugs.</li>
     <li><strong>Google Analytics for Firebase</strong> — anonymous-by-design usage events (screens viewed, features used), an app-instance identifier, device and app metadata, and an approximate location derived from IP address. Purpose: understanding which features matter so development time goes to the right places.</li>
+    <li><strong>Firebase Performance Monitoring</strong> — automatic performance traces such as app start-up time, screen rendering, and network-request timing (including the addresses dodast requests, their response sizes, and whether they succeed), together with your device model, OS version, app version, an approximate location derived from IP address, and a Firebase installation identifier. Purpose: finding slow screens, dropped frames, and failing network calls so they can be fixed.</li>
     <li><strong>Firebase Cloud Messaging</strong> — a push registration token for the app installation, used only to deliver notifications to the app.</li>
     <li><strong>Firebase Remote Config</strong> — fetches configuration values (for example, feature flags) using the app's Firebase installation identifier.</li>
   </ul>
   <p>This data is processed by Google on Google's infrastructure, which may be located outside your country. Details of what Firebase collects and for how long it is kept: <a href="https://firebase.google.com/support/privacy" rel="external">Privacy and Security in Firebase</a> and the <a href="https://policies.google.com/privacy" rel="external">Google Privacy Policy</a>.</p>
   <p>Diagnostics exist to make the app better, not to profile you: they are not used for advertising and are never sold or shared for advertising.</p>
 
-  <h2 id="permissions">7. App permissions and why</h2>
+  <h2 id="purchases">7. In-app purchases (RevenueCat)</h2>
+  <p>dodast is free. A <strong>future release</strong> may add <strong>optional</strong> in-app purchases (for example, to unlock extra features) — none of this applies until that release ships, and buying anything will always be your choice. When it does ship, purchases will work like this:</p>
+  <ul>
+    <li><strong>Payment is handled entirely by Google Play.</strong> Your payment method (card, balance, and so on) is processed by Google under the <a href="https://policies.google.com/privacy" rel="external">Google Privacy Policy</a>. dodast and RevenueCat <strong>never see or store your card or payment details</strong>.</li>
+    <li>To verify purchases and unlock or restore what you have bought across your devices, dodast uses <strong><a href="https://www.revenuecat.com" rel="external">RevenueCat</a></strong> (RevenueCat, Inc.). RevenueCat receives your <strong>purchase history</strong> (which products you bought and their purchase, renewal, or expiry state), the Google Play purchase token/receipt used to check the purchase, a <strong>RevenueCat app-user identifier</strong> generated for the installation (not your name or email), and standard device and app metadata (including an approximate location derived from IP address). Purpose: validating purchases, unlocking and restoring your entitlements, managing any subscriptions, and preventing fraud.</li>
+    <li>RevenueCat processes this data on its own infrastructure, which may be outside your country, under the <a href="https://www.revenuecat.com/privacy/" rel="external">RevenueCat Privacy Policy</a>. It is used to run purchases — not for advertising — and is never sold or shared for advertising. There is still no dodast account: the identifier ties to your purchases, not to your identity.</li>
+  </ul>
+
+  <h2 id="permissions">8. App permissions and why</h2>
   <table>
     <thead>
       <tr><th>Permission (Android)</th><th>Why dodast asks for it</th></tr>
@@ -160,7 +174,7 @@
   </table>
   <p>dodast requests <strong>no location, no contacts, no microphone, and no camera</strong> permission (QR scanning happens inside Google Play services' own scanner, as described above).</p>
 
-  <h2 id="never">8. What dodast never does</h2>
+  <h2 id="never">9. What dodast never does</h2>
   <ul>
     <li>Never uploads your music or your library index to the internet — the only place music ever goes is directly to devices you invite into a listening session, on your own network.</li>
     <li>Never deletes your files, and never touches them behind your back — the only write dodast can perform is a tag edit you explicitly save, one file at a time.</li>
@@ -169,26 +183,27 @@
     <li>Never requires an account or collects your name, email, or contacts.</li>
   </ul>
 
-  <h2 id="retention">9. Data retention and deletion</h2>
+  <h2 id="retention">10. Data retention and deletion</h2>
   <ul>
     <li><strong>On-device data</strong> (library, playlists, playback state, artwork cache) exists only on your device. Clear the app's storage or uninstall the app and it is gone.</li>
     <li><strong>Firebase data</strong> is retained by Google according to the schedules described in <a href="https://firebase.google.com/support/privacy" rel="external">Firebase's privacy documentation</a> (crash reports and analytics events are kept for limited periods, then deleted or aggregated).</li>
-    <li>If you would like diagnostics associated with your device deleted, <a href="mailto:mohamad.khakpaki@gmail.com">email me</a> and I will handle the request against the Firebase tools available to me.</li>
+    <li><strong>Purchase data</strong> (once in-app purchases ship) is kept by Google Play and by RevenueCat for as long as needed to provide, restore, and account for your purchases, and for as long as tax, accounting, and consumer-protection law require.</li>
+    <li>If you would like the diagnostics or purchase data associated with your device deleted, <a href="mailto:mohamad.khakpaki@gmail.com">email me</a> and I will handle the request against the Firebase and RevenueCat tools available to me.</li>
   </ul>
 
-  <h2 id="website">10. This website</h2>
+  <h2 id="website">11. This website</h2>
   <p>This site is a set of static pages hosted on <strong>GitHub Pages</strong> (GitHub, Inc.). It sets no cookies and runs no analytics or trackers of mine. As with any web host, GitHub may log standard technical data such as your IP address when serving the pages — see the <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" rel="external">GitHub Privacy Statement</a>.</p>
 
-  <h2 id="children">11. Children</h2>
+  <h2 id="children">12. Children</h2>
   <p>dodast is not directed at children under 13 (or the equivalent minimum age in your country), and I do not knowingly collect personal data from children. If you believe a child has provided personal data through the app, contact me and I will delete it.</p>
 
-  <h2 id="rights">12. Your rights</h2>
+  <h2 id="rights">13. Your rights</h2>
   <p>Depending on where you live (for example under the GDPR or UK GDPR), you may have rights to access, correct, delete, or object to the processing of personal data concerning you, and to lodge a complaint with your local data-protection authority. Since dodast keeps almost everything on your device, most of these rights are literally in your hands — but for anything involving the services above, or any question at all, email me and I will help: <a href="mailto:mohamad.khakpaki@gmail.com">mohamad.khakpaki@gmail.com</a>.</p>
 
-  <h2 id="changes">13. Changes to this policy</h2>
+  <h2 id="changes">14. Changes to this policy</h2>
   <p>When the app gains or loses a feature, library, or service that touches your data, this policy is updated to match, with a new "Last updated" date at the top. Material changes will also be called out in the app's release notes.</p>
 
-  <h2 id="contact">14. Contact</h2>
+  <h2 id="contact">15. Contact</h2>
   <p>Mohammad Khakpaki · <a href="mailto:mohamad.khakpaki@gmail.com">mohamad.khakpaki@gmail.com</a></p>
 </main>
 

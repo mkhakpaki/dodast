@@ -4,7 +4,9 @@
   Whenever a library, SDK, or third-party service is ADDED to or REMOVED from the dodast app,
   update section 6 (Third-party content and services) below (and the counterpart sections in
   privacy.html) and bump the "Last updated" date. Currently covered: fanart.tv, MusicBrainz,
-  Cover Art Archive, Google Play services (code scanner), Firebase (pre-covered).
+  Cover Art Archive, Google Play services (code scanner), Firebase (Crashlytics, Analytics,
+  Performance Monitoring, Cloud Messaging, Remote Config - pre-covered), and RevenueCat + Google
+  Play Billing for optional in-app purchases (PLANNED, pre-covered in section 7 + section 6).
   Section 4 reflects the tag editor (the ONE user-initiated file write; never deletes) — keep it
   in sync with privacy.html if that feature changes.
 -->
@@ -60,6 +62,7 @@
       <li><a href="#your-media">Your media stays yours</a></li>
       <li><a href="#fair-use">Fair use of the app</a></li>
       <li><a href="#third-party">Third-party content and services</a></li>
+      <li><a href="#purchases">Purchases and subscriptions</a></li>
       <li><a href="#ip">Intellectual property</a></li>
       <li><a href="#as-is">The app is provided "as is"</a></li>
       <li><a href="#liability">Limitation of liability</a></li>
@@ -118,30 +121,41 @@
   <h3>Google services</h3>
   <ul>
     <li>QR-code scanning for session join runs in <strong>Google Play services' code scanner</strong> on your device, under <a href="https://policies.google.com/terms" rel="external">Google's Terms of Service</a>.</li>
-    <li>Releases that include <strong>Firebase</strong> (crash reporting, analytics, messaging, remote configuration — see the <a href="privacy.html#firebase">privacy policy</a>) rely on services of Google LLC under Google's terms. Google Play, Google Play services, and Firebase are trademarks of Google LLC.</li>
+    <li>Releases that include <strong>Firebase</strong> (crash reporting, analytics, performance monitoring, messaging, remote configuration — see the <a href="privacy.html#firebase">privacy policy</a>) rely on services of Google LLC under Google's terms. Google Play, Google Play services, and Firebase are trademarks of Google LLC.</li>
     <li>If you install dodast from Google Play, Google Play's own terms of service also apply to the download and updates.</li>
   </ul>
 
-  <h2 id="ip">7. Intellectual property</h2>
+  <h2 id="purchases">7. Purchases and subscriptions</h2>
+  <p>dodast is currently free. A <strong>future release</strong> may offer <strong>optional</strong> in-app purchases — for example, a one-time unlock or a subscription for extra features. Until such a release ships, this section does not apply. When it does, these terms govern those purchases:</p>
+  <ul>
+    <li><strong>Billing runs through Google Play.</strong> All payments are taken and processed by Google under the <a href="https://play.google.com/about/play-terms/" rel="external">Google Play Terms of Service</a>; I never receive or store your payment details.</li>
+    <li><strong>Entitlements are managed with <a href="https://www.revenuecat.com" rel="external">RevenueCat</a></strong> (RevenueCat, Inc.), which verifies purchases and unlocks or restores what you have bought across your devices. The data RevenueCat receives is described in the <a href="privacy.html#purchases">privacy policy</a>; using in-app purchases also means accepting RevenueCat's terms.</li>
+    <li><strong>Subscriptions renew automatically</strong> until you cancel. You can view, manage, or cancel a subscription — and turn off auto-renewal — from your Google Play account's subscription settings; cancelling stops future renewals and keeps access until the current period ends.</li>
+    <li><strong>Refunds</strong> are handled under Google Play's refund policy and any mandatory consumer rights where you live. As a one-person project I cannot issue Google Play payments myself, but tell me about any problem and I will help where I can.</li>
+    <li><strong>Prices and paid features may change.</strong> A change never affects a purchase you have already completed; for subscriptions, Google Play notifies you of price changes and asks for your consent where required before they take effect.</li>
+    <li>Paid features are <strong>licensed</strong> to you under section 3, not sold, and — like the rest of dodast — are provided "as is" (sections 9 and 10).</li>
+  </ul>
+
+  <h2 id="ip">8. Intellectual property</h2>
   <p>The dodast app, its name, logo, design, and this website are © 2026 Mohammad Khakpaki. Your media is yours (section 4); third-party artwork, data, and trademarks belong to their respective owners (section 6).</p>
 
-  <h2 id="as-is">8. The app is provided "as is"</h2>
+  <h2 id="as-is">9. The app is provided "as is"</h2>
   <p>dodast is an independent project built and maintained by one person, provided <strong>"as is" and "as available"</strong>, without warranties of any kind, express or implied — including merchantability, fitness for a particular purpose, and non-infringement. I don't promise the app will be uninterrupted, error-free, or that artwork and other third-party-powered features will always be available.</p>
 
-  <h2 id="liability">9. Limitation of liability</h2>
+  <h2 id="liability">10. Limitation of liability</h2>
   <p>To the maximum extent permitted by law, I am not liable for indirect, incidental, special, or consequential damages, or for loss of data, arising out of your use of (or inability to use) dodast. My total liability for any claim relating to the app is limited to the amount you paid for it — currently nothing — or the smallest amount permitted by law.</p>
   <p>Nothing in these terms excludes or limits liability that cannot lawfully be excluded (such as for intentional misconduct), and nothing affects statutory consumer rights that apply where you live.</p>
 
-  <h2 id="termination">10. Ending things</h2>
-  <p>You can stop using dodast at any time by uninstalling it — your on-device data goes with it. I may suspend or terminate your license if you materially breach these terms (for example, section 5). Sections 4, 6, 7, 8, 9, and 12 survive termination.</p>
+  <h2 id="termination">11. Ending things</h2>
+  <p>You can stop using dodast at any time by uninstalling it — your on-device data goes with it. I may suspend or terminate your license if you materially breach these terms (for example, section 5). Sections 4, 6, 7, 8, 9, 10, and 13 survive termination.</p>
 
-  <h2 id="changes">11. Changes to the app and these terms</h2>
+  <h2 id="changes">12. Changes to the app and these terms</h2>
   <p>dodast is in active development: features may be added, changed, or removed. These terms may be updated to match — the current version always lives at this page, with the "Last updated" date at the top. If you keep using the app after a change, that counts as acceptance. Material changes will also be called out in the app's release notes.</p>
 
-  <h2 id="law">12. Governing law</h2>
+  <h2 id="law">13. Governing law</h2>
   <p>These terms are governed by the laws of the developer's country of residence, without regard to conflict-of-law rules — except that if the consumer-protection law of the country where you live gives you mandatory rights, those rights prevail. Any dispute that cannot be settled informally (please just <a href="mailto:mohamad.khakpaki@gmail.com">email me</a> first — I read everything) belongs to the competent courts under that law.</p>
 
-  <h2 id="contact">13. Contact</h2>
+  <h2 id="contact">14. Contact</h2>
   <p>Mohammad Khakpaki · <a href="mailto:mohamad.khakpaki@gmail.com">mohamad.khakpaki@gmail.com</a></p>
 </main>
 
