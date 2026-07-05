@@ -6,6 +6,11 @@
   "Last updated" date. Currently covered:
     - On-device: Media3/ExoPlayer, SQLDelight, Koin, Compose Multiplatform, kotlinx, ZXing (QR
       generation), jaudiotagger (tag editor; LOCAL file writes only, no network)
+    - Video (added 5 July 2026): dodast also scans and plays video files on the device (own
+      permission: READ_MEDIA_VIDEO on Android 13+), generates thumbnails locally via Coil's
+      VideoFrameDecoder (no network involved), and supports mixed audio+video playlists. When a
+      session host shares a video, only its DEMUXED AUDIO TRACK is sent to synced clients, not
+      the video itself.
     - The tag editor is the ONE write dodast performs on audio files (user-initiated, per-file
       system consent on Android 10+). "Never deletes" stays true; do not reintroduce "read-only"
       wording while the editor exists.
@@ -57,7 +62,7 @@
 <main class="doc">
   <header class="doc-head">
     <h1>Privacy Policy</h1>
-    <p class="updated">Last updated: 4 July 2026 · Applies to the dodast app and this website</p>
+    <p class="updated">Last updated: 5 July 2026 · Applies to the dodast app and this website</p>
   </header>
 
   <div class="summary-card">
@@ -98,12 +103,12 @@
   <h2 id="on-device">2. Data that stays on your device</h2>
   <p>dodast is local-first. The following is stored in a private database and cache on your device, and nowhere else:</p>
   <ul>
-    <li><strong>Your library index</strong> — file locations and the tags read from your audio files (titles, artists, albums, durations, dates).</li>
-    <li><strong>Playlists</strong> you create.</li>
+    <li><strong>Your library index</strong> — file locations and the tags read from your audio files (titles, artists, albums, durations, dates), plus file details for your videos (title, duration, resolution, size).</li>
+    <li><strong>Playlists</strong> you create, which can mix audio and video.</li>
     <li><strong>Playback state</strong> — your queue, position, and settings, so the app can resume where you left off.</li>
-    <li><strong>Artwork cache</strong> — embedded art extracted from your files and images downloaded during artwork lookups.</li>
+    <li><strong>Artwork and thumbnail cache</strong> — embedded art extracted from your audio files, video thumbnails generated locally from your video files, and images downloaded during artwork lookups.</li>
   </ul>
-  <p>This data is excluded from Android's cloud backup, is never uploaded anywhere, and is deleted when you clear the app's storage or uninstall the app. dodast <strong>never deletes or moves your music</strong>. The one write it can perform is the tag editor (a song's Details → Edit tags): when you save, your edits are written into that file's own tags — on Android 10 and newer only after the system's per-file consent dialog — and nothing is ever written without you asking. The one thing that does travel between devices — the currently playing track during a listening session — goes only to devices you invite, and is described in <a href="#sessions">section 4</a>.</p>
+  <p>This data is excluded from Android's cloud backup, is never uploaded anywhere, and is deleted when you clear the app's storage or uninstall the app. dodast <strong>never deletes or moves your music or video files</strong>. The one write it can perform is the tag editor (a song's Details → Edit tags): when you save, your edits are written into that file's own tags — on Android 10 and newer only after the system's per-file consent dialog — and nothing is ever written without you asking. The one thing that does travel between devices — the currently playing track during a listening session — goes only to devices you invite, and is described in <a href="#sessions">section 4</a>.</p>
 
   <h2 id="artwork">3. Artwork lookups over the internet</h2>
   <p>When a file has no embedded artwork, dodast looks the artwork up online during and after library scans. Three services are contacted, and what is sent to them is metadata from your own files' tags — never the files themselves:</p>
@@ -121,7 +126,7 @@
     <li>Your device <strong>advertises the session on your local network</strong> (via mDNS/Bonjour-style discovery) so other devices can find it. The advertisement includes a device/session name.</li>
     <li>If you show a <strong>QR code</strong> to let someone join, that code contains local connection details (such as your device's local network address). It is generated on your device.</li>
     <li>While in a session, devices exchange <strong>now-playing metadata</strong> (track titles, artists, timing) and <strong>playback commands</strong> directly with each other over your Wi-Fi.</li>
-    <li><strong>The music itself travels device-to-device.</strong> To keep every device in perfect sync, the host sends the current track — the audio file itself — directly to each joined device over your network. The receiving device uses it only to play the session: the audio is prepared in memory for playback, is not added to that device's music library, and no lasting copy of the file is kept.</li>
+    <li><strong>The audio itself travels device-to-device.</strong> To keep every device in perfect sync, the host sends the current track's audio directly to each joined device over your network. If the current item is a video, only its <strong>audio track is extracted and sent</strong> — the video image itself never leaves the host. The receiving device uses this only to play the session: the audio is prepared in memory for playback, is not added to that device's library, and no lasting copy is kept.</li>
   </ul>
   <p>None of this traffic is routed through the internet or any server of mine — there is no such server. It stays on your local network, which also means it is only as private as that network: on a shared or public Wi-Fi, other people on the same network could observe session traffic (including the transferred audio). Leaving a session (or closing the app) stops all of it.</p>
 
@@ -159,6 +164,10 @@
         <td>Scanning and playing the music files on your device. The app never deletes files; the only write is a tag edit you save, and on Android 10 and newer each file's edit goes through the system's own consent dialog.</td>
       </tr>
       <tr>
+        <td>Photos &amp; videos<br>(READ_MEDIA_VIDEO on Android 13+; read storage on older versions)</td>
+        <td>Scanning and playing the video files on your device, and generating thumbnails locally. Requested separately from the music permission and only when you open the Videos tab. The app never deletes your videos.</td>
+      </tr>
+      <tr>
         <td>Notifications</td>
         <td>Showing the playback notification with play/pause/skip controls.</td>
       </tr>
@@ -176,7 +185,7 @@
 
   <h2 id="never">9. What dodast never does</h2>
   <ul>
-    <li>Never uploads your music or your library index to the internet — the only place music ever goes is directly to devices you invite into a listening session, on your own network.</li>
+    <li>Never uploads your music, videos, or your library index to the internet — the only thing that ever leaves your device during a listening session is audio, sent directly to devices you invite, on your own network.</li>
     <li>Never deletes your files, and never touches them behind your back — the only write dodast can perform is a tag edit you explicitly save, one file at a time.</li>
     <li>Never shows ads or uses advertising SDKs.</li>
     <li>Never sells your data, or shares it with anyone for advertising or marketing.</li>
