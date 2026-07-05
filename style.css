@@ -180,6 +180,31 @@ a:hover { text-decoration: underline; }
 
 .cta-row { display: flex; flex-wrap: wrap; gap: 12px; }
 
+.store-badges {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px;
+  margin-top: 24px;
+}
+
+.store-badge-play img { display: block; border-radius: 8px; }
+
+.store-badge-soon {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  height: 54px;
+  padding: 0 16px;
+  border: 1px solid var(--border-default);
+  border-radius: 10px;
+  color: var(--text-tertiary);
+}
+.store-badge-soon svg { flex: none; }
+.store-badge-text { display: flex; flex-direction: column; line-height: 1.25; }
+.soon-label { font-size: 0.68rem; }
+.soon-store { font-size: 1.05rem; font-weight: 600; color: var(--text-secondary); }
+
 .btn {
   display: inline-flex;
   align-items: center;
