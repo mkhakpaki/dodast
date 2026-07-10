@@ -15,8 +15,10 @@
       system consent on Android 10+). "Never deletes" stays true; do not reintroduce "read-only"
       wording while the editor exists.
     - Network: Ktor + Coil -> MusicBrainz, Cover Art Archive, fanart.tv
-    - Google: Play services code scanner (QR join), Firebase (Crashlytics, Analytics, Performance
-      Monitoring, Cloud Messaging, Remote Config) - pre-covered ahead of the release that ships them
+    - Google: Play services code scanner (QR join), Play in-app review (added 10 July 2026 —
+      dialog drawn by Google Play; app sends no data, only a local last-asked timestamp), Firebase
+      (Crashlytics, Analytics, Performance Monitoring, Cloud Messaging, Remote Config) -
+      pre-covered ahead of the release that ships them
     - Purchases (PLANNED, not yet shipped): RevenueCat SDK + Google Play Billing for optional in-app
       purchases - pre-covered in section 7. When it ships, confirm the collected data types
       (purchase history, RevenueCat app-user id, device metadata) and keep the Play Data safety form
@@ -62,7 +64,7 @@
 <main class="doc">
   <header class="doc-head">
     <h1>Privacy Policy</h1>
-    <p class="updated">Last updated: 5 July 2026 · Applies to the dodast app and this website</p>
+    <p class="updated">Last updated: 10 July 2026 · Applies to the dodast app and this website</p>
   </header>
 
   <div class="summary-card">
@@ -130,8 +132,9 @@
   </ul>
   <p>None of this traffic is routed through the internet or any server of mine — there is no such server. It stays on your local network, which also means it is only as private as that network: on a shared or public Wi-Fi, other people on the same network could observe session traffic (including the transferred audio). Leaving a session (or closing the app) stops all of it.</p>
 
-  <h2 id="qr">5. QR code scanning</h2>
+  <h2 id="qr">5. QR code scanning and in-app review (Google Play services)</h2>
   <p>Joining a session by QR code uses <strong>Google's code scanner</strong>, which runs inside Google Play services on your device — this is why dodast itself needs <strong>no camera permission</strong>. Scanning is processed on the device, and dodast receives only the decoded text of the code. Google Play services' own handling of data is governed by <a href="https://policies.google.com/privacy" rel="external">Google's Privacy Policy</a>.</p>
+  <p>dodast may also occasionally invite you to rate it using <strong>Google Play's in-app review</strong> dialog. The dialog is shown and handled entirely by Google Play: dodast sends it no data about you, cannot see whether the dialog appeared, and never learns what (or whether) you answered — any rating you submit goes to Google Play under Google's Privacy Policy. dodast only keeps a local, on-device note of when it last asked, so it does not ask often.</p>
 
   <h2 id="firebase">6. Firebase services (Google)</h2>
   <p>dodast uses the following <strong>Firebase</strong> services, provided by Google LLC, starting from the first release that ships with them. If you are running an earlier build, none of this applies to it yet — and if a future release adds or removes a Firebase service, this policy will be updated at the same time.</p>
