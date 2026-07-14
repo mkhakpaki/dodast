@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Support — dodast</title>
+  <meta name="description" content="Answers to common questions about dodast — library scanning, listening sessions, artwork, privacy — and how to reach the developer directly.">
+  <link rel="canonical" href="https://mkhakpaki.github.io/dodast/support">
+  <meta name="theme-color" content="#0b0d10" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#f5f7fa" media="(prefers-color-scheme: light)">
+  <link rel="icon" href="favicon.ico" sizes="any">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="manifest" href="site.webmanifest">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="./">
+      <img src="icon-192.png" alt="dodast" width="26" height="26">
+      dodast
+    </a>
+    <nav class="site-nav" aria-label="Site">
+      <a href="./">Home</a>
+      <a href="support.html" aria-current="page">Support</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="terms.html">Terms</a>
+    </nav>
+  </div>
+</header>
+
+<main class="doc">
+  <header class="doc-head">
+    <h1>Support</h1>
+    <p class="updated">Answers to the questions people actually ask — and a direct line to the person who builds dodast.</p>
+  </header>
+
+  <h2 id="faq">Frequently asked questions</h2>
+
+  <div class="faq-list">
+    <details>
+      <summary>What is dodast?</summary>
+      <div class="faq-a">
+        <p>dodast is a local-first media player. It plays the music and video files you already own, finds their artwork, and keeps playback in sync across the devices in your home — without your library ever touching the cloud. There is no account, no streaming catalogue, and no ads.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>Where can I get it?</summary>
+      <div class="faq-a">
+        <p>dodast is available for Android on <a href="https://play.google.com/store/apps/details?id=com.mkhakpaki.dodast">Google Play</a>. An iOS version is in development on the same shared codebase and will come to the App Store when it's ready.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>Does dodast cost anything?</summary>
+      <div class="faq-a">
+        <p>dodast is free and shows no ads. A future release may add optional in-app purchases for extra features — buying anything will always be your choice.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>Is my music or my data uploaded anywhere?</summary>
+      <div class="faq-a">
+        <p>No. dodast has no server and no cloud — your files, your library index, and your playlists stay on your device. The internet is used for artwork lookups (which send only tag metadata like artist and album names) and for crash and usage diagnostics. During a listening session, audio travels directly between your own devices on your local network, never through the internet. The <a href="privacy.html">privacy policy</a> describes all of it, service by service.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>How do listening sessions work?</summary>
+      <div class="faq-a">
+        <p>One device hosts a session, and other devices on the same Wi-Fi join it — they find the session automatically, or you can show a QR code for instant joining. The host sends the current track's audio straight to each joined device so every speaker hears the same moment. If the current item is a video, only its audio track is sent — the video itself never leaves the host.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>Why can't another device find my session?</summary>
+      <div class="faq-a">
+        <p>A few things to check:</p>
+        <ul>
+          <li><strong>Same network</strong> — both devices need to be on the same Wi-Fi network.</li>
+          <li><strong>Guest or public Wi-Fi</strong> — many guest, hotel, and office networks isolate devices from each other, which blocks automatic discovery. Joining by QR code sometimes still works; a home network always will.</li>
+          <li><strong>VPNs</strong> — a VPN on either device can block local network traffic. Try turning it off while in a session.</li>
+        </ul>
+      </div>
+    </details>
+
+    <details>
+      <summary>Why is some music, video, or artwork missing?</summary>
+      <div class="faq-a">
+        <p><strong>Missing files:</strong> rescans are live and incremental, so new files should appear shortly after they land on your device. If something never shows up, check that the file plays in another app and that dodast has the <em>Music &amp; audio</em> permission (or <em>Photos &amp; videos</em> for the Videos tab).</p>
+        <p><strong>Missing artwork:</strong> art embedded in your files always comes first. For everything else dodast looks the artwork up online, which needs an internet connection — results are cached, and misses are retried on later scans. Some releases simply aren't in the archives yet, in which case embedding the art in the file's tags always works.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>Can dodast delete or change my files?</summary>
+      <div class="faq-a">
+        <p>dodast never deletes or moves your music or videos. The only change it can ever make to a file is a tag edit you save yourself — and on Android 10 and newer, each file's edit goes through the system's own consent dialog first.</p>
+      </div>
+    </details>
+  </div>
+
+  <h2 id="contact">Contact</h2>
+
+  <div class="contact-card">
+    <p>dodast is built and supported by one person — me, <strong>Mohammad Khakpaki</strong>. There's no ticket system and no support team: you email me, and I answer. Bug reports, feature ideas, questions the FAQ doesn't cover, or <a href="privacy.html#retention">data deletion requests</a> — all welcome at the same address.</p>
+    <p>For bug reports, it helps a lot if you include:</p>
+    <ul>
+      <li>Your device model and Android version</li>
+      <li>The dodast version you're using</li>
+      <li>What you did, what you expected, and what happened instead</li>
+    </ul>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="mailto:mohamad.khakpaki@gmail.com?subject=dodast%20support">Email me</a>
+      <a class="btn btn-ghost" href="mailto:mohamad.khakpaki@gmail.com">mohamad.khakpaki@gmail.com</a>
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="credits">
+      <p>Album cover art courtesy of the <a href="https://coverartarchive.org" rel="external">Cover Art Archive</a> (MusicBrainz &amp; Internet Archive). Artist images provided by <a href="https://fanart.tv" rel="external">fanart.tv</a> — dodast is not endorsed, certified, or otherwise approved by fanart.tv.</p>
+      <p>© 2026 Mohammad Khakpaki · <a href="./">dodast</a> · <a href="privacy.html">Privacy policy</a> · <a href="terms.html">Terms of service</a></p>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
