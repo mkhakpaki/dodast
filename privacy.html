@@ -19,10 +19,18 @@
       dialog drawn by Google Play; app sends no data, only a local last-asked timestamp), Firebase
       (Crashlytics, Analytics, Performance Monitoring, Cloud Messaging, Remote Config) -
       pre-covered ahead of the release that ships them
-    - Purchases (PLANNED, not yet shipped): RevenueCat SDK + Google Play Billing for optional in-app
-      purchases - pre-covered in section 7. When it ships, confirm the collected data types
-      (purchase history, RevenueCat app-user id, device metadata) and keep the Play Data safety form
-      in sync.
+    - Ads (added 15 July 2026, pre-covered ahead of the release that ships them): Google AdMob
+      in the free app + Google UMP consent SDK (EEA/UK/CH consent form; ATT on iOS). Collects
+      advertising ID (AD_ID permission on Android 13+), IP-derived approximate location, device
+      metadata, ad interaction events. Section 7; also reflected in the summary card, permissions
+      table, never-list, retention, and children sections. Keep the Play "Ads" declaration, Play
+      Data safety form, and App Store privacy labels in sync with this section.
+    - Purchases (PLANNED, not yet shipped): Adapty SDK + Google Play Billing (Android) / Apple
+      In-App Purchase (iOS) for optional in-app purchases - pre-covered in section 8. Premium
+      REMOVES ADS (stated in sections 7 and 8 here, terms sections 7 and 8, support FAQ) — if
+      that changes, update all four spots. When it ships, confirm the collected data types
+      (purchase history, Adapty profile id, device metadata) and keep the Play Data safety form
+      + App Store privacy labels in sync.
     - Session sync transfers the CURRENT TRACK's full bytes host->clients (protocol FileOffer).
       The "no lasting copy" wording in section 4 depends on clients decoding in memory and
       deleting the decode temp file (AudioPlayer.prepare). Re-check that section if received
@@ -33,7 +41,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Privacy Policy — dodast</title>
-  <meta name="description" content="The dodast privacy policy: what stays on your device (almost everything), what goes over the network (artwork lookups and diagnostics), and your choices.">
+  <meta name="description" content="The dodast privacy policy: what stays on your device (almost everything), what goes over the network (artwork lookups, ads, purchases, and diagnostics), and your choices.">
   <link rel="canonical" href="https://mkhakpaki.github.io/dodast/privacy.html">
   <meta name="theme-color" content="#0b0d10" media="(prefers-color-scheme: dark)">
   <meta name="theme-color" content="#f5f7fa" media="(prefers-color-scheme: light)">
@@ -65,15 +73,15 @@
 <main class="doc">
   <header class="doc-head">
     <h1>Privacy Policy</h1>
-    <p class="updated">Last updated: 10 July 2026 · Applies to the dodast app and this website</p>
+    <p class="updated">Last updated: 15 July 2026 · Applies to the dodast app and this website</p>
   </header>
 
   <div class="summary-card">
     <p><strong>The short version:</strong></p>
     <ul>
       <li>Your music and library are <strong>never uploaded</strong> — dodast has no server and no cloud. The app never deletes your files; the only change it can make is a <strong>tag edit you save yourself</strong>, confirmed per file with Android's own permission prompt.</li>
-      <li><strong>No accounts, no ads, no selling or sharing of data</strong> for advertising. Ever.</li>
-      <li>The internet is used for two things: <strong>artwork lookups</strong> you can see, and <strong>crash/usage diagnostics</strong> (Google Firebase) described below.</li>
+      <li><strong>No accounts, and your data is never sold.</strong> The free app is supported by <strong>ads (Google AdMob)</strong>; an optional <strong>premium removes ads</strong> and unlocks extra features. Both are described below, together with your consent choices. Advertisers never see your library or your files.</li>
+      <li>The internet is used for a few bounded things: <strong>artwork lookups</strong> you can see, <strong>ads and purchase validation</strong>, and <strong>crash/usage diagnostics</strong> (Google Firebase) — each described below.</li>
       <li>Listening sessions sync <strong>directly between your devices on your local network</strong> — no server in the middle. That includes the music: the host device sends the current track straight to the devices that joined.</li>
     </ul>
   </div>
@@ -87,7 +95,8 @@
       <li><a href="#sessions">Listening sessions on your local network</a></li>
       <li><a href="#qr">QR code scanning</a></li>
       <li><a href="#firebase">Firebase services (Google)</a></li>
-      <li><a href="#purchases">In-app purchases (RevenueCat)</a></li>
+      <li><a href="#ads">Advertising (Google AdMob)</a></li>
+      <li><a href="#purchases">In-app purchases (Adapty)</a></li>
       <li><a href="#permissions">App permissions and why</a></li>
       <li><a href="#never">What dodast never does</a></li>
       <li><a href="#retention">Data retention and deletion</a></li>
@@ -149,15 +158,26 @@
   <p>This data is processed by Google on Google's infrastructure, which may be located outside your country. Details of what Firebase collects and for how long it is kept: <a href="https://firebase.google.com/support/privacy" rel="external">Privacy and Security in Firebase</a> and the <a href="https://policies.google.com/privacy" rel="external">Google Privacy Policy</a>.</p>
   <p>Diagnostics exist to make the app better, not to profile you: they are not used for advertising and are never sold or shared for advertising.</p>
 
-  <h2 id="purchases">7. In-app purchases (RevenueCat)</h2>
-  <p>dodast is free. A <strong>future release</strong> may add <strong>optional</strong> in-app purchases (for example, to unlock extra features) — none of this applies until that release ships, and buying anything will always be your choice. When it does ship, purchases will work like this:</p>
+  <h2 id="ads">7. Advertising (Google AdMob)</h2>
+  <p>The free version of dodast shows ads, starting from the first release that ships them — if you are running an earlier build, it shows no ads yet. Ads are served by <strong>Google AdMob</strong> (Google LLC) and are what keep the app free. One boundary matters most here: <strong>advertisers never see your music, videos, playlists, or anything else about your library.</strong> What the ad system receives is the standard ad-serving data below:</p>
   <ul>
-    <li><strong>Payment is handled entirely by Google Play.</strong> Your payment method (card, balance, and so on) is processed by Google under the <a href="https://policies.google.com/privacy" rel="external">Google Privacy Policy</a>. dodast and RevenueCat <strong>never see or store your card or payment details</strong>.</li>
-    <li>To verify purchases and unlock or restore what you have bought across your devices, dodast uses <strong><a href="https://www.revenuecat.com" rel="external">RevenueCat</a></strong> (RevenueCat, Inc.). RevenueCat receives your <strong>purchase history</strong> (which products you bought and their purchase, renewal, or expiry state), the Google Play purchase token/receipt used to check the purchase, a <strong>RevenueCat app-user identifier</strong> generated for the installation (not your name or email), and standard device and app metadata (including an approximate location derived from IP address). Purpose: validating purchases, unlocking and restoring your entitlements, managing any subscriptions, and preventing fraud.</li>
-    <li>RevenueCat processes this data on its own infrastructure, which may be outside your country, under the <a href="https://www.revenuecat.com/privacy/" rel="external">RevenueCat Privacy Policy</a>. It is used to run purchases — not for advertising — and is never sold or shared for advertising. There is still no dodast account: the identifier ties to your purchases, not to your identity.</li>
+    <li><strong>Advertising identifier</strong> — your device's resettable advertising ID (on Android the Google advertising ID; on iOS the IDFA, and only if you allow tracking in Apple's App Tracking Transparency prompt).</li>
+    <li><strong>IP address and device metadata</strong> — device model, OS version, screen size, app identifier and version, and an approximate location derived from the IP address.</li>
+    <li><strong>Ad interaction data</strong> — which ads were served, viewed, and tapped. Used for ad delivery, measurement, frequency capping, and fraud prevention; with your consent, also for ad personalization.</li>
+  </ul>
+  <p><strong>Consent comes first where the law requires it.</strong> In the European Economic Area, the United Kingdom, and Switzerland, dodast shows a consent dialog (Google's User Messaging Platform) before any ad loads: you choose whether ads may be personalized, and declining personalization keeps the app fully usable with <strong>non-personalized ads</strong>, which rely on context rather than a profile of you. You can revisit your choice at any time from the app's settings. On iOS, Apple's tracking prompt works the same way: decline it and ads stay non-personalized.</p>
+  <p>You can also <strong>reset or delete your advertising ID</strong> whenever you like in your device's settings (Android: Settings → Privacy → Ads; iOS: Settings → Privacy &amp; Security → Tracking).</p>
+  <p>Google processes this data on its own infrastructure, which may be outside your country, under the <a href="https://policies.google.com/privacy" rel="external">Google Privacy Policy</a>; how Google uses data from apps that use its advertising services is described at <a href="https://policies.google.com/technologies/partner-sites" rel="external">policies.google.com/technologies/partner-sites</a>. Buying premium (<a href="#purchases">section 8</a>) <strong>removes ads</strong>: while your purchase is active, dodast shows no ads.</p>
+
+  <h2 id="purchases">8. In-app purchases (Adapty)</h2>
+  <p>dodast is free. A <strong>future release</strong> adds <strong>optional</strong> in-app purchases — a premium that <strong>removes ads</strong> and unlocks extra features. None of this applies until that release ships, and buying anything will always be your choice. When it does ship, purchases will work like this:</p>
+  <ul>
+    <li><strong>Payment is handled entirely by the store you installed from.</strong> On Android your payment method (card, balance, and so on) is processed by Google Play under the <a href="https://policies.google.com/privacy" rel="external">Google Privacy Policy</a>; on iOS, by Apple's App Store under <a href="https://www.apple.com/legal/privacy/" rel="external">Apple's Privacy Policy</a>. dodast and Adapty <strong>never see or store your card or payment details</strong>.</li>
+    <li>To verify purchases and unlock or restore what you have bought across your devices, dodast uses <strong><a href="https://adapty.io" rel="external">Adapty</a></strong> (Adapty Tech Inc.). Adapty receives your <strong>purchase history</strong> (which products you bought and their purchase, renewal, or expiry state), the store purchase token/receipt used to check the purchase, an <strong>Adapty profile identifier</strong> generated for the installation (not your name or email), and standard device and app metadata (including an approximate location derived from IP address). Purpose: validating purchases, unlocking and restoring your entitlements, managing any subscriptions, and preventing fraud.</li>
+    <li>Adapty processes this data on its own infrastructure, which may be outside your country, under the <a href="https://adapty.io/privacy/" rel="external">Adapty Privacy Policy</a>. It is used to run purchases — not to serve you ads — and is never sold. There is still no dodast account: the identifier ties to your purchases, not to your identity.</li>
   </ul>
 
-  <h2 id="permissions">8. App permissions and why</h2>
+  <h2 id="permissions">9. App permissions and why</h2>
   <table>
     <thead>
       <tr><th>Permission (Android)</th><th>Why dodast asks for it</th></tr>
@@ -177,7 +197,11 @@
       </tr>
       <tr>
         <td>Internet, network &amp; Wi-Fi state</td>
-        <td>Artwork lookups, Firebase diagnostics, and device-to-device session sync on your local network.</td>
+        <td>Artwork lookups, ads (Google AdMob), purchase validation, Firebase diagnostics, and device-to-device session sync on your local network.</td>
+      </tr>
+      <tr>
+        <td>Advertising ID<br>(AD_ID on Android 13+)</td>
+        <td>Lets Google AdMob serve and measure the ads described in <a href="#ads">section 7</a>. The ID is resettable and deletable by you at any time in your device's privacy settings.</td>
       </tr>
       <tr>
         <td>Foreground service (media playback), wake lock</td>
@@ -187,36 +211,37 @@
   </table>
   <p>dodast requests <strong>no location, no contacts, no microphone, and no camera</strong> permission (QR scanning happens inside Google Play services' own scanner, as described above).</p>
 
-  <h2 id="never">9. What dodast never does</h2>
+  <h2 id="never">10. What dodast never does</h2>
   <ul>
     <li>Never uploads your music, videos, or your library index to the internet — the only thing that ever leaves your device during a listening session is audio, sent directly to devices you invite, on your own network.</li>
     <li>Never deletes your files, and never touches them behind your back — the only write dodast can perform is a tag edit you explicitly save, one file at a time.</li>
-    <li>Never shows ads or uses advertising SDKs.</li>
-    <li>Never sells your data, or shares it with anyone for advertising or marketing.</li>
+    <li>Never gives advertisers your library, playlists, files, or listening history — ads live in their own box (<a href="#ads">section 7</a>) and receive only the ad-serving data described there.</li>
+    <li>Never sells your data. Beyond the ad serving described in section 7, nothing is shared for advertising or marketing.</li>
     <li>Never requires an account or collects your name, email, or contacts.</li>
   </ul>
 
-  <h2 id="retention">10. Data retention and deletion</h2>
+  <h2 id="retention">11. Data retention and deletion</h2>
   <ul>
     <li><strong>On-device data</strong> (library, playlists, playback state, artwork cache) exists only on your device. Clear the app's storage or uninstall the app and it is gone.</li>
     <li><strong>Firebase data</strong> is retained by Google according to the schedules described in <a href="https://firebase.google.com/support/privacy" rel="external">Firebase's privacy documentation</a> (crash reports and analytics events are kept for limited periods, then deleted or aggregated).</li>
-    <li><strong>Purchase data</strong> (once in-app purchases ship) is kept by Google Play and by RevenueCat for as long as needed to provide, restore, and account for your purchases, and for as long as tax, accounting, and consumer-protection law require.</li>
-    <li>If you would like the diagnostics or purchase data associated with your device deleted, <a href="mailto:mohamad.khakpaki@gmail.com">email me</a> and I will handle the request against the Firebase and RevenueCat tools available to me.</li>
+    <li><strong>Advertising data</strong> is retained by Google under Google's advertising data policies. The advertising ID it keys on is yours: reset or delete it at any time in your device's privacy settings.</li>
+    <li><strong>Purchase data</strong> (once in-app purchases ship) is kept by the store (Google Play or the App Store) and by Adapty for as long as needed to provide, restore, and account for your purchases, and for as long as tax, accounting, and consumer-protection law require.</li>
+    <li>If you would like the diagnostics, advertising, or purchase data associated with your device deleted, <a href="mailto:mohamad.khakpaki@gmail.com">email me</a> and I will handle the request against the Firebase, AdMob, and Adapty tools available to me.</li>
   </ul>
 
-  <h2 id="website">11. This website</h2>
+  <h2 id="website">12. This website</h2>
   <p>This site is a set of static pages hosted on <strong>GitHub Pages</strong> (GitHub, Inc.). It sets no cookies and runs no analytics or trackers of mine. As with any web host, GitHub may log standard technical data such as your IP address when serving the pages — see the <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" rel="external">GitHub Privacy Statement</a>.</p>
 
-  <h2 id="children">12. Children</h2>
-  <p>dodast is not directed at children under 13 (or the equivalent minimum age in your country), and I do not knowingly collect personal data from children. If you believe a child has provided personal data through the app, contact me and I will delete it.</p>
+  <h2 id="children">13. Children</h2>
+  <p>dodast is not directed at children under 13 (or the equivalent minimum age in your country), and I do not knowingly collect personal data from children. The ads dodast shows are likewise not directed at children, and its ad requests are not flagged for child-directed treatment. If you believe a child has provided personal data through the app, contact me and I will delete it.</p>
 
-  <h2 id="rights">13. Your rights</h2>
+  <h2 id="rights">14. Your rights</h2>
   <p>Depending on where you live (for example under the GDPR or UK GDPR), you may have rights to access, correct, delete, or object to the processing of personal data concerning you, and to lodge a complaint with your local data-protection authority. Since dodast keeps almost everything on your device, most of these rights are literally in your hands — but for anything involving the services above, or any question at all, email me and I will help: <a href="mailto:mohamad.khakpaki@gmail.com">mohamad.khakpaki@gmail.com</a>.</p>
 
-  <h2 id="changes">14. Changes to this policy</h2>
+  <h2 id="changes">15. Changes to this policy</h2>
   <p>When the app gains or loses a feature, library, or service that touches your data, this policy is updated to match, with a new "Last updated" date at the top. Material changes will also be called out in the app's release notes.</p>
 
-  <h2 id="contact">15. Contact</h2>
+  <h2 id="contact">16. Contact</h2>
   <p>Mohammad Khakpaki · <a href="mailto:mohamad.khakpaki@gmail.com">mohamad.khakpaki@gmail.com</a></p>
 </main>
 
