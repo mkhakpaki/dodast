@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Get dodast</title>
+<style>
+  :root{
+    --bg:#f6f7f9; --card:#ffffff; --fg:#14161a; --muted:#5b626c;
+    --border:#e4e7ec; --accent:#6c5ce7; --accent-fg:#ffffff; --disabled:#9aa0aa;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#0e1013; --card:#171a1f; --fg:#f2f4f7; --muted:#a4abb5;
+      --border:#262b32; --accent:#8b7bf0; --accent-fg:#0e1013; --disabled:#5b626c;
+    }
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;height:100%}
+  body{
+    background:var(--bg); color:var(--fg);
+    font:16px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    display:flex; align-items:center; justify-content:center; padding:24px;
+  }
+  .card{
+    background:var(--card); border:1px solid var(--border); border-radius:18px;
+    max-width:420px; width:100%; padding:32px 26px; text-align:center;
+    box-shadow:0 6px 30px rgba(0,0,0,.06);
+  }
+  .logo{
+    width:64px;height:64px;border-radius:16px;margin:0 auto 16px;
+    background:linear-gradient(135deg,var(--accent),#00cec9);
+    display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:30px;
+  }
+  h1{font-size:22px;margin:0 0 6px}
+  p{color:var(--muted);margin:0 0 22px}
+  .badges{display:flex;flex-direction:column;gap:12px}
+  .badge{
+    display:flex;align-items:center;justify-content:center;gap:10px;
+    padding:13px 18px;border-radius:12px;text-decoration:none;font-weight:600;
+    border:1px solid var(--border);background:var(--card);color:var(--fg);
+  }
+  .badge.primary{background:var(--accent);color:var(--accent-fg);border-color:transparent}
+  .badge svg{width:20px;height:20px;flex:0 0 auto}
+  .badge.disabled{color:var(--disabled);cursor:default}
+  .badge small{display:block;font-weight:500;font-size:11px;opacity:.85;line-height:1.2}
+  .badge b{display:block;font-size:15px;line-height:1.2}
+  .hint{margin-top:18px;font-size:13px;color:var(--muted)}
+  .hint a{color:var(--accent)}
+</style>
+</head>
+<body>
+<main class="card">
+  <div class="logo">d</div>
+  <h1>Get dodast</h1>
+  <p>Listen together in perfect sync. Choose your store:</p>
+  <div class="badges" id="badges"></div>
+  <div class="hint" id="hint"></div>
+</main>
+<script>
+(function(){
+  // ============================================================================
+  //  SWAP THIS ONE CONSTANT once the iOS app is approved on the App Store.
+  //  App Store Connect -> App Information -> Apple ID (numeric). Format: "id123456789".
+  //  While it is the placeholder below, iPhone/iPad visitors get a "coming soon"
+  //  panel instead of being sent to a dead App Store link.
+  var APP_STORE_ID = "id0000000000";
+  // ============================================================================
+
+  var PLACEHOLDER_ID = "id0000000000";
+  var PLAY_URL = "https://play.google.com/store/apps/details?id=com.mkhakpaki.dodast";
+  var APP_STORE_URL = "https://apps.apple.com/app/" + APP_STORE_ID;
+
+  // Preserve ALL incoming query params verbatim on redirect.
+  var rawQuery = location.search.replace(/^\?/, "");
+  function play(){ return rawQuery ? PLAY_URL + "&" + rawQuery : PLAY_URL; }
+  function appStore(){ return APP_STORE_URL + location.search; }
+
+  var ua = navigator.userAgent || "";
+  var isAndroid = /Android/i.test(ua);
+  // iPadOS 13+ masquerades as Mac; treat touch-capable Macs as iPad.
+  var isIOS = /iPhone|iPad|iPod/i.test(ua) || (/Macintosh/i.test(ua) && "ontouchend" in document);
+  var iosLive = APP_STORE_ID !== PLACEHOLDER_ID;
+
+  var APPLE = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.05 12.04c-.03-3.1 2.53-4.58 2.65-4.66-1.44-2.11-3.69-2.4-4.49-2.43-1.91-.19-3.73 1.12-4.7 1.12-.97 0-2.46-1.09-4.05-1.06-2.08.03-4 1.21-5.07 3.08-2.16 3.75-.55 9.3 1.55 12.35 1.03 1.49 2.25 3.16 3.85 3.1 1.55-.06 2.13-1 4-1 1.87 0 2.39 1 4.02.97 1.66-.03 2.71-1.51 3.72-3.01 1.17-1.72 1.65-3.39 1.68-3.47-.04-.02-3.22-1.24-3.26-4.91zM14.13 3.75c.86-1.04 1.44-2.48 1.28-3.92-1.24.05-2.74.83-3.62 1.86-.79.92-1.49 2.39-1.3 3.8 1.38.11 2.79-.7 3.64-1.74z"/></svg>';
+  var PLAYG = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M4 2.5l13 9.5-13 9.5z"/></svg>';
+
+  var badges = document.getElementById("badges");
+  var hint = document.getElementById("hint");
+
+  function playBadge(primary){
+    return '<a class="badge'+(primary?' primary':'')+'" href="'+play()+'">'+PLAYG+
+           '<span><small>GET IT ON</small><b>Google Play</b></span></a>';
+  }
+  function appStoreBadge(primary){
+    if (iosLive){
+      return '<a class="badge'+(primary?' primary':'')+'" href="'+appStore()+'">'+APPLE+
+             '<span><small>Download on the</small><b>App Store</b></span></a>';
+    }
+    return '<span class="badge disabled">'+APPLE+
+           '<span><small>Coming soon on the</small><b>App Store</b></span></span>';
+  }
+
+  if (isAndroid){
+    badges.innerHTML = playBadge(true) + appStoreBadge(false);
+    hint.innerHTML = 'Taking you to Google Play&hellip; <a href="'+play()+'">Open manually</a>';
+    location.replace(play());
+  } else if (isIOS && iosLive){
+    badges.innerHTML = appStoreBadge(true) + playBadge(false);
+    hint.innerHTML = 'Taking you to the App Store&hellip; <a href="'+appStore()+'">Open manually</a>';
+    location.replace(appStore());
+  } else if (isIOS){
+    // iOS, App Store not live yet: show coming-soon, no dead redirect.
+    badges.innerHTML = appStoreBadge(true) + playBadge(false);
+    hint.textContent = "The iPhone and iPad app is on the way. Android is available now.";
+  } else {
+    // Desktop / everything else: offer both, redirect nowhere.
+    badges.innerHTML = playBadge(true) + appStoreBadge(false);
+    hint.textContent = "Open this link on your phone to install dodast.";
+  }
+})();
+</script>
+</body>
+</html>
