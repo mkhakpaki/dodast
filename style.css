@@ -188,7 +188,7 @@ a:hover { text-decoration: underline; }
   margin-top: 24px;
 }
 
-.store-badge-play img { display: block; border-radius: 8px; }
+.store-badge-play img,
 .store-badge-apple img { display: block; }
 
 .btn {
