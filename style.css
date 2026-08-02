@@ -189,21 +189,7 @@ a:hover { text-decoration: underline; }
 }
 
 .store-badge-play img { display: block; border-radius: 8px; }
-
-.store-badge-soon {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  height: 54px;
-  padding: 0 16px;
-  border: 1px solid var(--border-default);
-  border-radius: 10px;
-  color: var(--text-tertiary);
-}
-.store-badge-soon svg { flex: none; }
-.store-badge-text { display: flex; flex-direction: column; line-height: 1.25; }
-.soon-label { font-size: 0.68rem; }
-.soon-store { font-size: 1.05rem; font-weight: 600; color: var(--text-secondary); }
+.store-badge-apple img { display: block; }
 
 .btn {
   display: inline-flex;
