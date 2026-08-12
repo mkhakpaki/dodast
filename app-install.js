@@ -38,6 +38,8 @@
   function build() {
     var storeUrl = isAndroid ? PLAY_URL : APP_STORE_URL;
     var storeName = isAndroid ? "Google Play" : "the App Store";
+    // Each store's own word for the button, so it reads native on both.
+    var verb = isAndroid ? "Install" : "Get";
 
     var bar = document.createElement("div");
     bar.className = "app-bar";
@@ -46,10 +48,11 @@
     bar.innerHTML =
       '<img class="app-bar-icon" src="icon-192.png" alt="" width="40" height="40">' +
       '<div class="app-bar-text">' +
-        '<strong>Get dodast</strong>' +
-        '<span>The real app — free on ' + storeName + '</span>' +
+        '<strong>dodast — free</strong>' +
+        '<span>Your music, in every room</span>' +
       '</div>' +
-      '<a class="btn btn-primary app-bar-cta" href="' + storeUrl + '">Get</a>' +
+      '<a class="btn btn-primary app-bar-cta" href="' + storeUrl + '"' +
+        ' aria-label="' + verb + ' dodast from ' + storeName + '">' + verb + '</a>' +
       '<button class="app-bar-close" type="button" aria-label="Dismiss">&times;</button>';
 
     bar.querySelector(".app-bar-close").addEventListener("click", function () {
