@@ -4,9 +4,22 @@
   "description": "A local-first music player that keeps your rooms in sync.",
   "start_url": "/dodast/",
   "scope": "/dodast/",
-  "display": "standalone",
+  "display": "browser",
   "background_color": "#0b0d10",
   "theme_color": "#0b0d10",
+  "prefer_related_applications": true,
+  "related_applications": [
+    {
+      "platform": "play",
+      "id": "com.mkhakpaki.dodast",
+      "url": "https://play.google.com/store/apps/details?id=com.mkhakpaki.dodast"
+    },
+    {
+      "platform": "itunes",
+      "id": "6790904205",
+      "url": "https://apps.apple.com/app/id6790904205"
+    }
+  ],
   "icons": [
     { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
     { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" }
