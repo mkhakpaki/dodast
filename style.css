@@ -511,6 +511,62 @@ th { color: var(--text-primary); font-weight: 600; border-bottom: 1px solid var(
   .toc ol { columns: 1; }
 }
 
+/* ---------- get-the-app bar (mobile, injected by app-install.js) ---------- */
+
+.app-bar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 12px calc(12px + env(safe-area-inset-bottom));
+  background: var(--bg-elevated);
+  border-top: 1px solid var(--border-default);
+  box-shadow: 0 -8px 28px rgba(0, 0, 0, 0.28);
+}
+
+.app-bar-icon { border-radius: 9px; flex: none; }
+
+.app-bar-text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  line-height: 1.3;
+}
+.app-bar-text strong { font-size: 0.95rem; }
+.app-bar-text span {
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.app-bar-cta {
+  margin-left: auto;
+  flex: none;
+  padding: 9px 16px;
+}
+
+.app-bar-close {
+  flex: none;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--text-tertiary);
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.has-app-bar body { padding-bottom: 84px; }
+
 /* ---------- print (legal docs) ---------- */
 
 @media print {
@@ -522,7 +578,7 @@ th { color: var(--text-primary); font-weight: 600; border-bottom: 1px solid var(
     --text-secondary: #222222;
     --text-tertiary: #444444;
   }
-  .site-header, .site-footer, .toc { display: none; }
+  .site-header, .site-footer, .toc, .app-bar { display: none; }
   body { font-size: 12pt; }
   .doc { padding: 0; max-width: none; }
   a { color: inherit; text-decoration: underline; }
