@@ -19,6 +19,9 @@
       dialog drawn by Google Play; app sends no data, only a local last-asked timestamp), Firebase
       (Crashlytics, Analytics, Performance Monitoring, Cloud Messaging, Remote Config) -
       pre-covered ahead of the release that ships them
+    - Ratings + feedback (added 23 October 2026, section 5): dodast's own star-rating sheet
+      (Android; the score 1-5 is a GA4 event, no text), store-page link-out, and a "Send
+      feedback" mailto draft carrying app version / OS / device model / language. No new SDK.
     - Ads (added 15 July 2026, pre-covered ahead of the release that ships them): Google AdMob
       in the free app + Google UMP consent SDK (EEA/UK/CH consent form; ATT on iOS). Collects
       advertising ID (AD_ID permission on Android 13+), IP-derived approximate location, device
@@ -75,7 +78,7 @@
 <main class="doc">
   <header class="doc-head">
     <h1>Privacy Policy</h1>
-    <p class="updated">Last updated: 3 August 2026 · Applies to the dodast app and this website</p>
+    <p class="updated">Last updated: 23 October 2026 · Applies to the dodast app and this website</p>
   </header>
 
   <div class="summary-card">
@@ -144,9 +147,11 @@
   </ul>
   <p>None of this traffic is routed through the internet or any server of mine — there is no such server. It stays on your local network, which also means it is only as private as that network: on a shared or public Wi-Fi, other people on the same network could observe session traffic (including the transferred audio). Leaving a session (or closing the app) stops all of it.</p>
 
-  <h2 id="qr">5. QR code scanning and in-app review (Google Play services)</h2>
+  <h2 id="qr">5. QR code scanning, ratings, and feedback</h2>
   <p>Joining a session by QR code uses <strong>Google's code scanner</strong>, which runs inside Google Play services on your device — this is why dodast itself needs <strong>no camera permission</strong>. Scanning is processed on the device, and dodast receives only the decoded text of the code. Google Play services' own handling of data is governed by <a href="https://policies.google.com/privacy" rel="external">Google's Privacy Policy</a>.</p>
-  <p>dodast may also occasionally invite you to rate it using <strong>Google Play's in-app review</strong> dialog. The dialog is shown and handled entirely by Google Play: dodast sends it no data about you, cannot see whether the dialog appeared, and never learns what (or whether) you answered — any rating you submit goes to Google Play under Google's Privacy Policy. dodast only keeps a local, on-device note of when it last asked, so it does not ask often.</p>
+  <p>dodast may also occasionally invite you to rate it using <strong>Google Play's in-app review</strong> dialog. The dialog is shown and handled entirely by Google Play: dodast sends it no data about you, cannot see whether the dialog appeared, and never learns what (or whether) you answered — any rating you submit goes to Google Play under Google's Privacy Policy. dodast only keeps a local, on-device note of when it last asked, so it does not ask often. On iPhone and iPad the same applies to Apple's rating prompt, which is shown and handled by Apple.</p>
+  <p>On Android, dodast may instead show its <strong>own short rating screen</strong> (one to five stars). The score you pick is recorded as an anonymous usage event through Google Analytics for Firebase (<a href="#firebase">section 6</a>) — just the number, never any text — so I can see how satisfied people are overall. A high score offers a button that opens dodast's Google Play page, where any rating you leave is handled by Google Play. A lower score offers to send feedback instead.</p>
+  <p><strong>Feedback by email.</strong> "Send feedback" (on that rating screen or in Settings) opens <em>your own</em> email app with a pre-filled message to me. The draft includes the app version, your OS version, your device model, and the app language, so I can reproduce problems — you can read, edit, or delete any of it before sending, and nothing is sent unless you send it yourself. Feedback emails are used only to answer you and improve dodast, and I will delete them on request.</p>
 
   <h2 id="firebase">6. Firebase services (Google)</h2>
   <p>dodast uses the following <strong>Firebase</strong> services, provided by Google LLC, starting from the first release that ships with them. If you are running an earlier build, none of this applies to it yet — and if a future release adds or removes a Firebase service, this policy will be updated at the same time.</p>
