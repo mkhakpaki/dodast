@@ -14,6 +14,18 @@
     - The tag editor is the ONE write dodast performs on audio files (user-initiated, per-file
       system consent on Android 10+). "Never deletes" stays true; do not reintroduce "read-only"
       wording while the editor exists.
+    - Listening history (added 26 November 2026, sections 2, 10, 11; pre-covered ahead of the
+      smart-playlists release): local play_event table (song id, title|artist|duration match
+      key, start time, time listened, duration, how the play ended) behind the auto playlists
+      (Top 10, Most played, Recently played, Your <Genre>, Often skipped) and opt-in smart
+      shuffle. Stored only in the app database: never uploaded, synced or shared (Android
+      allowBackup=false). Nothing is recorded while the device is a session guest. Two app-side
+      promises this text depends on: the Settings action is labelled "Clear listening history",
+      and analytics about the feature carry only enum types + count buckets, never track ids,
+      titles, artists or genres. If history is ever synced, backed up, shared or sent in
+      analytics, rewrite section 2. iOS (live since 2 August 2026): the app database is NOT yet
+      excluded from iCloud device backup, which already affects all of section 2; exclude it
+      in the app or qualify "never uploaded" for iPhone backups.
     - Network: Ktor + Coil -> MusicBrainz, Cover Art Archive, fanart.tv
     - Google: Play services code scanner (QR join), Play in-app review (added 10 July 2026 —
       dialog drawn by Google Play; app sends no data, only a local last-asked timestamp), Firebase
@@ -78,7 +90,7 @@
 <main class="doc">
   <header class="doc-head">
     <h1>Privacy Policy</h1>
-    <p class="updated">Last updated: 23 October 2026 · Applies to the dodast app and this website</p>
+    <p class="updated">Last updated: 26 November 2026 · Applies to the dodast app and this website</p>
   </header>
 
   <div class="summary-card">
@@ -120,12 +132,14 @@
   <h2 id="on-device">2. Data that stays on your device</h2>
   <p>dodast is local-first. The following is stored in a private database and cache on your device, and nowhere else:</p>
   <ul>
-    <li><strong>Your library index</strong> — file locations and the tags read from your audio files (titles, artists, albums, durations, dates), plus file details for your videos (title, duration, resolution, size).</li>
+    <li><strong>Your library index</strong> — file locations and the tags read from your audio files (titles, artists, albums, genres, durations, dates), plus file details for your videos (title, duration, resolution, size).</li>
     <li><strong>Playlists</strong> you create, which can mix audio and video.</li>
     <li><strong>Playback state</strong> — your queue, position, and settings, so the app can resume where you left off.</li>
+    <li><strong>Listening history</strong> — which songs in your library you play, when, how long you listen, and whether you finish or skip them (see below).</li>
     <li><strong>Artwork and thumbnail cache</strong> — embedded art extracted from your audio files, video thumbnails generated locally from your video files, and images downloaded during artwork lookups.</li>
   </ul>
   <p>This data is excluded from Android's cloud backup, is never uploaded anywhere, and is deleted when you clear the app's storage or uninstall the app. dodast <strong>never deletes or moves your music or video files</strong>. The one write it can perform is the tag editor (a song's Details → Edit tags): when you save, your edits are written into that file's own tags — on Android 10 and newer only after the system's per-file consent dialog — and nothing is ever written without you asking. The one thing that does travel between devices — the currently playing track during a listening session — goes only to devices you invite, and is described in <a href="#sessions">section 4</a>.</p>
+  <p><strong>Listening history.</strong> Starting from the release that introduces automatic playlists, dodast keeps this history to build them (Top 10, Most played, Recently played, Often skipped, and playlists for your favorite genres) and, if you turn it on, a smart shuffle. It is stored only on your device and never uploaded, and it is deleted by <strong>Clear listening history</strong> in Settings or by uninstalling the app. Nothing is recorded while your device is a guest in someone else's listening session. The usage events described in <a href="#firebase">section 6</a> note only which of these features you use and rough counts, never which songs, artists, or genres you play.</p>
 
   <h2 id="artwork">3. Artwork lookups over the internet</h2>
   <p>When a file has no embedded artwork, dodast looks the artwork up online during and after library scans. Three services are contacted, and what is sent to them is metadata from your own files' tags — never the files themselves:</p>
@@ -221,7 +235,7 @@
 
   <h2 id="never">10. What dodast never does</h2>
   <ul>
-    <li>Never uploads your music, videos, or your library index to the internet — the only thing that ever leaves your device during a listening session is audio, sent directly to devices you invite, on your own network.</li>
+    <li>Never uploads your music, videos, library index, or listening history to the internet — the only thing that ever leaves your device during a listening session is audio, sent directly to devices you invite, on your own network.</li>
     <li>Never deletes your files, and never touches them behind your back — the only write dodast can perform is a tag edit you explicitly save, one file at a time.</li>
     <li>Never gives advertisers your library, playlists, files, or listening history — ads live in their own box (<a href="#ads">section 7</a>) and receive only the ad-serving data described there.</li>
     <li>Never sells your data. Beyond the ad serving described in section 7, nothing is shared for advertising or marketing.</li>
@@ -230,7 +244,7 @@
 
   <h2 id="retention">11. Data retention and deletion</h2>
   <ul>
-    <li><strong>On-device data</strong> (library, playlists, playback state, artwork cache) exists only on your device. Clear the app's storage or uninstall the app and it is gone.</li>
+    <li><strong>On-device data</strong> (library, playlists, playback state, listening history, artwork cache) exists only on your device. Clear the app's storage or uninstall the app and it is gone. Listening history can also be deleted on its own at any time with <strong>Clear listening history</strong> in Settings.</li>
     <li><strong>Firebase data</strong> is retained by Google according to the schedules described in <a href="https://firebase.google.com/support/privacy" rel="external">Firebase's privacy documentation</a> (crash reports and analytics events are kept for limited periods, then deleted or aggregated).</li>
     <li><strong>Advertising data</strong> is retained by Google under Google's advertising data policies. The advertising ID it keys on is yours: reset or delete it at any time in your device's privacy settings.</li>
     <li><strong>Purchase data</strong> (once in-app purchases ship) is kept by the store (Google Play or the App Store) and by Adapty for as long as needed to provide, restore, and account for your purchases, and for as long as tax, accounting, and consumer-protection law require.</li>
