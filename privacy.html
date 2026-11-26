@@ -23,8 +23,9 @@
       promises this text depends on: the Settings action is labelled "Clear listening history",
       and analytics about the feature carry only enum types + count buckets, never track ids,
       titles, artists or genres. If history is ever synced, backed up, shared or sent in
-      analytics, rewrite section 2. iOS: before it ships, exclude the database from iCloud
-      backup or qualify "never uploaded" for iPhone backups.
+      analytics, rewrite section 2. iOS (live since 2 August 2026): the app database is NOT yet
+      excluded from iCloud device backup, which already affects all of section 2; exclude it
+      in the app or qualify "never uploaded" for iPhone backups.
     - Network: Ktor + Coil -> MusicBrainz, Cover Art Archive, fanart.tv
     - Google: Play services code scanner (QR join), Play in-app review (added 10 July 2026 —
       dialog drawn by Google Play; app sends no data, only a local last-asked timestamp), Firebase
